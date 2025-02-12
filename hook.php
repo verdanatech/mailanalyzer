@@ -171,7 +171,7 @@ class PluginMailAnalyzer {
 
          // we must check if this email has not been received yet!
          // test if 'message-id' is in the DB
-         $messageId = $parm->input['_message']->messageid;
+         $messageId = $parm->input['_message'];
          $mailgateId = $local_mailgate->fields['id'];
          $uid = $parm->input['_uid'];
          $res = $DB->request(
@@ -196,8 +196,7 @@ class PluginMailAnalyzer {
 
             return;
          }
-
-         // search for 'Thread-Index' and 'References'
+            // search for 'Thread-Index' and 'References'
          $messages_id = self::getMailReferences($parm->input['_message']);
 
          if (count($messages_id) > 0) {
@@ -307,10 +306,9 @@ class PluginMailAnalyzer {
 
    /**
     * Summary of getMailReferences
-    * @param Laminas\Mail\Storage\Message $message
     * @return array
     */
-   private static function getMailReferences(Laminas\Mail\Storage\Message $message) {
+   private static function getMailReferences( $message) {
 
       $messages_id = []; // by default
 
